@@ -32,7 +32,7 @@ except KeyError:
 try:
     data_type = os.environ['DATATYPE']
 except KeyError:
-    print("export a DATA directory prior to running")
+    print("export a DATATYPE directory prior to running")
     sys.exit(1)
 
 test_file = os.path.join(data_dir, data_type + '_cae_test.h5')
