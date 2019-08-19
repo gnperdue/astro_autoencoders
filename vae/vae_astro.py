@@ -2,6 +2,7 @@
 # coding: utf-8
 import os
 import time
+import sys
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,8 +24,17 @@ from tfvae.train_fns import compute_loss
 from tfvae.tfk_models import CVAE
 
 
-data_dir = "/Users/perdue/Dropbox/Quantum_Computing/hep-qml/data/cae_splits"
-data_type = "stargalaxy_sim_20190214"
+try:
+    data_dir = os.environ['DATA']
+except KeyError:
+    print("export a DATA directory prior to running")
+    sys.exit(1)
+try:
+    data_type = os.environ['DATATYPE']
+except KeyError:
+    print("export a DATA directory prior to running")
+    sys.exit(1)
+
 test_file = os.path.join(data_dir, data_type + '_cae_test.h5')
 train_file = os.path.join(data_dir, data_type + '_cae_train.h5')
 train_dataset = make_astro_dset(train_file, batch_size=32, shuffle=True)
